@@ -12,10 +12,17 @@ const CartItem = ({ onContinueShopping }) => {
     return cart.reduce((total, item) => total + parseFloat(item.cost.replace('$', '')) * item.quantity, 0).toFixed(2);
   };
 
+  // Calculate total quantity of items in the cart
+  const calculateTotalQuantity = () => {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  };
+
   const handleContinueShopping = (e) => {
     e.preventDefault();
     if (typeof onContinueShopping === 'function') {
-      onContinueShopping();
+      onContinueShopping(); // Call parent navigation function
+    } else {
+      console.error("onContinueShopping function is not defined");
     }
   };
 
@@ -44,11 +51,6 @@ const CartItem = ({ onContinueShopping }) => {
     return (parseFloat(item.cost.replace('$', '')) * item.quantity).toFixed(2);
   };
 
-  // Calculate total quantity of items in the cart
-  const calculateTotalQuantity = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0);
-  };
-
   return (
     <div className="cart-container">
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
@@ -75,7 +77,7 @@ const CartItem = ({ onContinueShopping }) => {
         <br />
         <button className="get-started-button1" onClick={(e) => handleCheckoutShopping(e)}>Checkout</button>
       </div>
-      <div className="cart">
+      <div className="navbar-cart-icon">
         <span>Total Items in Cart: {calculateTotalQuantity()}</span>
       </div>
     </div>
