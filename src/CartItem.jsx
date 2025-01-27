@@ -9,12 +9,12 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
-    return cart.reduce((total, item) => total + parseFloat(item.cost) * item.quantity, 0).toFixed(2);
+    return cart.reduce((total, item) => total + parseFloat(item.cost.replace('$', '')) * item.quantity, 0).toFixed(2);
   };
 
   const handleContinueShopping = (e) => {
     e.preventDefault();
-    if (onContinueShopping) {
+    if (typeof onContinueShopping === 'function') {
       onContinueShopping();
     }
   };
@@ -41,7 +41,7 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
-    return (parseFloat(item.cost) * item.quantity).toFixed(2);
+    return (parseFloat(item.cost.replace('$', '')) * item.quantity).toFixed(2);
   };
 
   // Calculate total quantity of items in the cart
@@ -58,7 +58,7 @@ const CartItem = ({ onContinueShopping }) => {
             <img className="cart-item-image" src={item.image} alt={item.name} />
             <div className="cart-item-details">
               <div className="cart-item-name">{item.name}</div>
-              <div className="cart-item-cost">Cost: ${item.cost}</div>
+              <div className="cart-item-cost">Cost: {item.cost}</div>
               <div className="cart-item-quantity">
                 <button className="cart-item-button cart-item-button-dec" onClick={() => handleDecrement(item)}>-</button>
                 <span className="cart-item-quantity-value">{item.quantity}</span>
