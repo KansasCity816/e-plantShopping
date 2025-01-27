@@ -75,7 +75,7 @@ const CartItem = ({ onContinueShopping }) => {
         <br />
         <button className="get-started-button1" onClick={(e) => handleCheckoutShopping(e)}>Checkout</button>
       </div>
-      <div className="navbar-cart-icon">
+      <div className="cart">
         <span>Total Items in Cart: {calculateTotalQuantity()}</span>
       </div>
     </div>
